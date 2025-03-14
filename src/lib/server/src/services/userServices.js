@@ -22,6 +22,14 @@ exports.getUserById = async ( id ) => {
     const [ rows ] = await pool.execute("SELECT * FROM users WHERE id = ?", [id]);
     return rows ; 
 };
+exports.getUserByUserName = async ( userName ) => {
+    const [ rows ] = await pool.execute("SELECT * FROM users WHERE userName = ? ", [ userName ]);
+    return rows;
+}
+exports.getUserByEmail = async ( email ) => {
+    const [ rows ] =  await pool.execute("SELECT * FROM users WHERE email = ? ",[ email ]);
+    return rows;
+}
 
 exports.updateUser = async ( id, data ) => {
     const { userName, email, password, role } = data
