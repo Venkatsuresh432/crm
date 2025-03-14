@@ -12,7 +12,7 @@ exports.createMarketplace = async ( req, res ) => {
 }
 
 
-exports.getAllcreateMarketplace = async ( req, res ) => {
+exports.getAllMarketplace = async ( req, res ) => {
     try {
         const marketplaces = await marketplaceService.getAllMarketPlace();
         if(!marketplaces) return responseHandler.notFound(res, "marketplace not Found")
@@ -37,7 +37,7 @@ exports.getMarketplaceById = async ( req, res ) => {
 exports.updateMarketplace = async ( req, res ) => {
     try {
         const marketplace = await marketplaceService.updateMarketPlace(req.params.id, req.body);
-        if(!marketplace) return responseHandler.notFound(req, "marketplace not found");
+        if(!marketplace) return responseHandler.notFound(res, "marketplace not found");
         return responseHandler.success(res, "marketplace updated successfully", marketplace)
     }
      catch (error) {

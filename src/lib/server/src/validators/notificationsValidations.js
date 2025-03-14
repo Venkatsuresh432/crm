@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const uuidValidation = Joi.string()
     .trim()
-    .guid({ version: ['uuidv4', 'uuidv5'] })
+    .guid({ version: ['uuidv1'] })
     .messages({
         'string.guid': 'Invalid UUID format'
     });

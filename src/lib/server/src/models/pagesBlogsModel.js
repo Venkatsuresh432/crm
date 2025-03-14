@@ -14,7 +14,7 @@ const createPagesBlogsTable = async () => {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE SET NULL
-)
+);
  `;
  try{
     const connection = await pool.getConnection();

@@ -15,18 +15,38 @@ exports.getAllUsersAudit = async () => {
 }
 
 exports.getUserAuditById = async ( id ) => {
-    const [ rows ] = await pool.execute("SELECT * FROM users_audit WHERE id = ?", [id]);
+    const [ rows ] = await pool.execute("SELECT * FROM user_audit WHERE id = ?", [id]);
     return rows ; 
 };
 
 
-exports.updateUserAudit = async ( id, data ) => {
-  
+exports.updateUserAudit2 = async ( id, data ) => {
+    const  { action_message, user_id } = data;
     const [ rows ] = await pool.execute(
-        "UPDATE user_audit SET userName = ?, email = ?, password = ?, role = ? WHERE id = ?",
-            [ data, id ]
+            "UPDATE user_audit SET action_message = ? user_id = ? WHERE id = ?",
+            [ action_message, user_id, id ]
     );
-    return rows; 
+    return rows.affectedRows > 0; 
+}
+exports.updateUserAudit = async ( id, data ) => {
+    const fields = [];
+    const params = [];
+    if(data.user_id !== undefined){
+        fields.push('user_id = ?')
+        params.push(data.user_id)
+    }
+    if(data.action_message !== undefined){
+        fields.push('action_message = ?')
+        params.push(data.action_message)
+    }
+    if(fields.length === 0){
+        throw new Error ('no field are provide for update')
+    }
+    params.push(id)
+    console.log(data)
+    const query = `UPDATE user_audit SET ${fields.join(', ')} WHERE id = ?`
+    const [ rows ] = await pool.execute(query, params)
+    return rows
 }
 
 

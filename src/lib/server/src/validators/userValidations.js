@@ -1,7 +1,7 @@
 const joi = require("joi")
 
 exports.createUser = joi.object({
-    userName: joi.string().min(3).max(255).required(),
+    username: joi.string().min(3).max(255).required(),
     email: joi.string().email().max(255).required(),
     password: joi.string().min(8).max(32)
         .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,32}$"))
@@ -14,7 +14,7 @@ exports.createUser = joi.object({
 
 
 exports.updateUser = joi.object({
-    userName: joi.string().min(3).max(255).required(),
+    username: joi.string().min(3).max(255).required(),
     email: joi.string().email().max(255),
     password: joi.string().min(8).max(32)
     .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,32}$"))

@@ -4,7 +4,7 @@ const responseHandler = require("../utils/responseHandler")
 exports.createUserAudit = async ( req, res ) => {
     try {
         const blog = await userAuditService.createUserAudit(req.body)  
-        return responseHandler.success(res, "Blog Category Successfully Created", blog, 201)  
+        return responseHandler.success(res, "User Audit Successfully Created", blog, 201)  
     } 
     catch (error) {
         return responseHandler.error(res, error.message)
@@ -26,7 +26,7 @@ exports.getUserAuditById = async ( req, res ) => {
     try {
         const blog = await userAuditService.getUserAuditById(req.params.id);
         if(!blog) return responseHandler.notFound(res, "Blog Not found");
-        return responseHandler.success(res , "Blog category fetch Successfully")
+        return responseHandler.success(res , "Blog category fetch Successfully", blog)
     } 
     catch (error) {
         return responseHandler.error(res, error.message)
@@ -35,7 +35,8 @@ exports.getUserAuditById = async ( req, res ) => {
 
 exports.updateUserAudit = async ( req, res ) => {
     try {
-        const blog = await userAuditService.deleteUserAudit(req.params.id, req.body);
+        const blog = await userAuditService.updateUserAudit(req.params.id, req.body);
+        console.log(req.body)
         if(!blog) return responseHandler.notFound(req, "data not found");
         return responseHandler.success(res, "blog updated successfully", blog)
     }
@@ -46,7 +47,7 @@ exports.updateUserAudit = async ( req, res ) => {
 
 exports.deleteUserAudit= async ( req, res ) => {
     try {
-        const deleted = await userAuditService.deleteBlogCategory(req.params.id);
+        const deleted = await userAuditService.deleteUserAudit(req.params.id);
         if(!deleted) return responseHandler.notFound(res, "blog Not Found");
                     return responseHandler.success(res, "blog Deleted Successfully"); 
     } 

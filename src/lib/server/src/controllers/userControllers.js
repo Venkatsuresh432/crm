@@ -44,13 +44,8 @@ exports.getUserById = async ( req, res ) => {
 
 // update user using Id
 exports.updateUserById = async ( req, res ) => {
-    try {
-            const { id } = req.params;
-            const { data } = req.body;
-            if(!id || !data){
-                return responseHandler.error(res, "data not found");
-            }  
-            const updateUser = userService.updateUser(id, data);
+    try { 
+            const updateUser = userService.updateUser(req.params.id, req.body);
             if(!updateUser) return responseHandler.notFound(res, "User Not Found");
             return responseHandler.success(res, "User Updated Successfully", updateUser);
     } 

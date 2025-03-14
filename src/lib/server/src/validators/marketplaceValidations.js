@@ -1,12 +1,10 @@
 
 const Joi = require('joi');
 
-const uuidValidation = Joi.string().trim().guid({ version: ['uuidv4', 'uuidv5'] })
+const uuidValidation = Joi.string().trim().guid({ version: ['uuidv1'] })
                         .messages({
                             'string.guid': 'Invalid UUID format'
                         });
-
-
 const urlValidation = Joi.string().trim().uri().optional()
                     .messages({
                         'string.uri': 'Invalid URL format'

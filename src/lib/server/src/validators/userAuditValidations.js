@@ -1,13 +1,13 @@
 const joi = require('joi')
 
 exports.craeteUserAuditSchema = joi.object({
-    user_id: joi.string().trim().guid({version: ['uuidv4', 'uuidv5']}).required()
+    user_id: joi.string().trim().guid({version: ['uuidv1']}).required()
             .messages({
                 'string.empty':'user id cannot be empty',
                 'string.guid': 'invalid uuid format',
                 'any.required': 'user id is required'
             }),
-    action_meaasge: joi.string().trim().min(5).max(1000).required()
+    action_message: joi.string().trim().min(5).max(1000).required()
                     .messages({
                         'string.base': 'action message must be an string',
                         'string.empty': 'action message cannot be empty',
@@ -17,11 +17,11 @@ exports.craeteUserAuditSchema = joi.object({
                     })        
 });
 exports.updateUserAuditSchema = joi.object({
-    user_id : joi.string().trim().guid({ version:[ 'uuidv4', 'uuidv5' ] }).optional()
+    user_id : joi.string().trim().guid({ version:[ 'uuidv1' ] }).optional()
                 .messages({
                     'string.guid':'invalid guid category id format'
                 }),
-    action_meaasge: joi.string().trim().min(5).max(1000).optional()
+    action_message: joi.string().trim().min(5).max(1000).optional()
                     .messages({
                         'string.base': 'action message must be an string',
                         'string.empty': 'action message cannot be empty',

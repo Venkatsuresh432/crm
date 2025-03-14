@@ -2,15 +2,15 @@ const express = require('express')
 const router = express.Router()
 const notificationController = require('../controllers/notificationsController')
 const validate = require('../middlewares/validate.middleware')
-// const userValidation = require('../validators/userValidations')
+const notificationValidation = require('../validators/notificationsValidations')
 
 router.route("/notification")
-.post( validate, notificationController.createNotifications )
+.post( validate(notificationValidation.createNotificationSchema), notificationController.createNotifications )
 .get( notificationController.getAllNotifications )
 
 router.route('/notification/:id')
 .get( notificationController.getNotificationsById )
-.put( validate, notificationController.updateNotifications )
+.put( validate(notificationValidation.updateNotificationSchema), notificationController.updateNotifications )
 .delete( notificationController.deleteNotifications )
 
 

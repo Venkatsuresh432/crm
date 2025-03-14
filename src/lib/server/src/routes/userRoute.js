@@ -5,7 +5,7 @@ const validate = require('../middlewares/validate.middleware')
 const userValidation = require('../validators/userValidations')
 
 router.route("/user")
-.post( validate (userValidation.createUser), userController.createUser )
+.post( validate(userValidation.createUser),userController.createUser )
 .get( userController.getAllUsers )
 
 router.route('/user/:id')

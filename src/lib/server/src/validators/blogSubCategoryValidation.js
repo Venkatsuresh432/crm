@@ -1,7 +1,7 @@
 const joi = require('joi')
 
 exports.createBlogSubCategorySchema = joi.object({
-    blog_category_id: joi.string().trim().guid({version:['uuidv4', 'uuidv5']}).required()
+    blog_category_id: joi.string().trim().guid({version:['uuidv1']}).required()
                         .messages({
                             'string.empty':'blog category id cannot be empty',
                             'string.guid': 'invalid blog category id format',
@@ -18,12 +18,12 @@ exports.createBlogSubCategorySchema = joi.object({
 })
 
 exports.updateblogSubCategorySchema = joi.object({
-    blog_category_id : joi.string().trim().guid({version: ['uuidv4', 'uuidv5']} ).optional()
+    blog_category_id : joi.string().trim().guid({version: ['uuidv1']} ).optional()
                         .messages({
                             'string.guid': 'invalid blog id format'
                         }),
     sub_category_name:  joi.string().trim().min(3).max(255).optional()
-                        .messgaes({
+                        .messages({
                             'string.base': 'sub-category name must be an string',
                                 "string.min":"sub-category name must be an atleast 3 charecters long",
                                 'string.empty': 'sub-category cannot be empty',

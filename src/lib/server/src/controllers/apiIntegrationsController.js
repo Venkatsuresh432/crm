@@ -1,9 +1,9 @@
 const apiIntegrationService = require("../services/apiIntegrationService")
 const responseHandler = require("../utils/responseHandler")
 
-exports.createApiInetgration = async ( req, res ) => {
+exports.createApiIntegration = async ( req, res ) => {
     try {
-        const api = await apiIntegrationService.createApiInetgration(req.body)  
+        const api = await apiIntegrationService.createApiIntegration(req.body)  
         return responseHandler.success(res, "Api Route Successfully Created", api, 201)  
     } 
     catch (error) {
@@ -12,9 +12,9 @@ exports.createApiInetgration = async ( req, res ) => {
 }
 
 
-exports.getAllApiInetgration = async ( req, res ) => {
+exports.getAllApiIntegration = async ( req, res ) => {
     try {
-        const apis = await apiIntegrationService.getAllApiInetgration();
+        const apis = await apiIntegrationService.getAllApiIntegration();
         if(!apis) return responseHandler.notFound(res, "Api not Found")
         return responseHandler.success(res, "Api Fetched Successfully", apis);  
     } 
@@ -23,9 +23,9 @@ exports.getAllApiInetgration = async ( req, res ) => {
     }
 }
 
-exports.getApiInetgrationById = async ( req, res ) => {
+exports.getApiIntegrationById = async ( req, res ) => {
     try {
-        const api = await apiIntegrationService.getApiInetgrationById(req.params.id);
+        const api = await apiIntegrationService.getApiIntegrationById(req.params.id);
         if(!api) return responseHandler.notFound(res, "api Not found");
         return responseHandler.success(res , "api fetch Successfully", api)
     } 
@@ -34,9 +34,9 @@ exports.getApiInetgrationById = async ( req, res ) => {
     }
 }
 
-exports.updateApiInetgration = async ( req, res ) => {
+exports.updateApiIntegration = async ( req, res ) => {
     try {
-        const api = await apiIntegrationService.updateApiInetgration(req.params.id, req.body);
+        const api = await apiIntegrationService.updateApiIntegration(req.params.id, req.body);
         if(!api) return responseHandler.notFound(req, "api not found");
         return responseHandler.success(res, "api updated successfully", api)
     }
@@ -45,9 +45,9 @@ exports.updateApiInetgration = async ( req, res ) => {
     }
 }
 
-exports.deleteApiInetgration = async ( req, res ) => {
+exports.deleteApiIntegration = async ( req, res ) => {
     try {
-        const deleted = await apiIntegrationService.deleteApiInetgration(req.params.id);
+        const deleted = await apiIntegrationService.deleteApiIntegration(req.params.id);
         if(!deleted) return responseHandler.notFound(res, "api Not Found");
                     return responseHandler.success(res, "api Deleted Successfully"); 
     } 

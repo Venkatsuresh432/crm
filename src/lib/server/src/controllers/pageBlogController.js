@@ -23,7 +23,7 @@ exports.getAllPageBlogCategory = async ( req, res ) => {
     }
 }
 
-exports.getPageBlogCategoryById = async ( req, res ) => {
+exports.getPageBlogCategoryById2 = async ( req, res ) => {
     try {
         const pageBlog = await pageBlogService.getPageBlogById(req.params.id);
         if(!pageBlog) return responseHandler.notFound(res, "pageBlog Not found");
@@ -33,6 +33,17 @@ exports.getPageBlogCategoryById = async ( req, res ) => {
         return responseHandler.error(res, error.message)
     }
 }
+
+exports.getPageBlogCategoryById = async (req, res) => {
+    try {
+        const pageBlog = await pageBlogService.getPageBlogById(req.params.id);
+        if (!pageBlog) return responseHandler.notFound(res, "Page blog not found");
+        return responseHandler.success(res, "Page blog fetched successfully", pageBlog);
+    } catch (error) {
+        return responseHandler.error(res, error.message);
+    }
+};
+
 
 exports.updatePageBlogCategory = async ( req, res ) => {
     try {

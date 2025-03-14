@@ -1,4 +1,4 @@
-const subCategoryService = require("../services/blogSubCategoryService")
+const subCategoryService = require("../services/blogSubCategoryServices")
 const responseHandler = require("../utils/responseHandler")
 
 exports.createSubBlogCategory = async ( req, res ) => {
@@ -10,7 +10,6 @@ exports.createSubBlogCategory = async ( req, res ) => {
         return responseHandler.error(res, error.message)
     }
 }
-
 
 exports.getAllSubBlogCategory = async ( req, res ) => {
     try {
@@ -37,7 +36,7 @@ exports.getSubBlogCategoryById = async ( req, res ) => {
 exports.updateSubBlogCategory = async ( req, res ) => {
     try {
         const subBlog = await subCategoryService.updateBlogSubCategory(req.params.id, req.body);
-        if(!subBlog) return responseHandler.notFound(req, "subBlog not found");
+        if(!subBlog) return responseHandler.notFound(res, "subBlog not found");
         return responseHandler.success(res, "subBlog updated successfully", subBlog)
     }
      catch (error) {
@@ -54,4 +53,4 @@ exports.deleteSubBlogsCategory = async ( req, res ) => {
     catch (error) {
         return responseHandler.error(res, error.message)
     }
-} 
+}

@@ -2,15 +2,15 @@ const express = require('express')
 const router = express.Router()
 const blogSubCategoryController = require('../controllers/blogSubCategoryController')
 const validate = require('../middlewares/validate.middleware')
-// const userValidation = require('../validators/userValidations')
+const subCategoryValidation = require('../validators/blogSubCategoryValidation')
 
 router.route("/blogsubcategory")
-.post( validate, blogSubCategoryController.createSubBlogCategory )
+.post( validate(subCategoryValidation.createBlogSubCategorySchema), blogSubCategoryController.createSubBlogCategory )
 .get( blogSubCategoryController.getAllSubBlogCategory )
 
 router.route('/blogsubcategory/:id')
 .get( blogSubCategoryController.getSubBlogCategoryById )
-.put( validate, blogSubCategoryController.updateSubBlogCategory )
+.put( validate(subCategoryValidation.updateblogSubCategorySchema), blogSubCategoryController.updateSubBlogCategory )
 .delete( blogSubCategoryController.deleteSubBlogsCategory )
 
 

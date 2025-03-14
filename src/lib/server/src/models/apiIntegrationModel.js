@@ -2,7 +2,7 @@ const pool = require('../config/db')
 
 const createApiIntegrationTable = async () => {
     const sql =`
-           CREATE TABLE api_integrations (
+           CREATE TABLE IF NOT EXISTS api_integrations (
             id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
             name VARCHAR(255) NOT NULL,
             endpoint_url TEXT NOT NULL,

@@ -1,11 +1,11 @@
-const { createUserTable } = require('../models/userModel');
-const { createBlogCategoryTable } = require('../models/blogCategoryModel')
-const { createBlogSubCategoryTable } = require('../models/blogSubCategoryModel')
-const { createUserAuditTable } = require('../controllers/userAuditController')
-const { createPagesBlogsTable } = require("../controllers/pageBlogController")
-const { createMarketPlaceTable } = require("../controllers/marketplaceController")
-const { createNotificationTable } = require("../controllers/notificationsController")
-const { createApiIntegrationTable } = require("../controllers/apiIntegrationsController")
+const { createUserTable } = require("../models/userModel");
+const { createBlogCategoryTable } = require("../models/blogCategoryModel")
+const { createBlogSubCategoryTable } = require("../models/blogSubCategoryModel")
+const { createUserAuditTable } = require('../models/userAuditModel')
+const { createPagesBlogsTable } = require("../models/pagesBlogsModel")
+const { createMarketPlaceTable } = require("../models/marketplaceModel")
+const { createNotificationTable } = require("../models/notificationsModel")
+const { createApiIntegrationTable } = require("../models/apiIntegrationModel")
 const initDatabase = async () => {
     try {
         await createUserTable();
