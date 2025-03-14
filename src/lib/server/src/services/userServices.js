@@ -15,7 +15,7 @@ exports.createUser = async ( data ) => {
 
 exports.getAllUsers = async () => {
     const [ rows ] = await pool.execute("SELECT * FROM users");
-    return rows
+    return rows;
 }
 
 exports.getUserById = async ( id ) => {
@@ -26,7 +26,7 @@ exports.getUserById = async ( id ) => {
 exports.updateUser = async ( id, data ) => {
     const { userName, email, password, role } = data
     const [ rows ] = await pool.execute(
-        "UPDATE users SET userName = ?, email = ? password = ?, role = ? WHERE id = ?",
+        "UPDATE users SET userName = ?, email = ?, password = ?, role = ? WHERE id = ?",
             [ userName, email, password, role, id ]
     );
     return rows; 
