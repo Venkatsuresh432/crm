@@ -94,7 +94,7 @@
   </script>
   
 <div class="card">
-  <div class="card-header ">Update Marketplace App</div>
+  <div class="card-header "><h3>Update Marketplace App</h3></div>
   <div class="card-body">
       <form on:submit|preventDefault={updateApp}>
           <div class="mb-3">

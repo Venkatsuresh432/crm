@@ -39,7 +39,7 @@
         })
       );
     } catch (error) {
-      console.error("Error fetching marketplace data:", error);
+      console.log("Error fetching marketplace data:", error);
     }
   }
 
@@ -78,7 +78,7 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="card-title">Marketplace Apps</h5>
-    <a href="/createMarketplace"><button class="btn btn-primary">Add App</button></a>
+    <a href="/createMarketplace" sveltekit:prefetch={false} ><button class="btn btn-primary">Add App</button></a>
   </div>
   <div class="card-body">
     <table class="table table-hover">

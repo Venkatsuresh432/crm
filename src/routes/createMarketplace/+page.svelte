@@ -1,5 +1,4 @@
 <script>
-    import { error } from "console";
     import { onMount } from "svelte";
     import { userStore } from '$lib/store';
     import { get } from 'svelte/store'; 
@@ -41,7 +40,7 @@
                 }
           });
           const data = await res.json();
-          $: users = data.data;
+          users = data.data;
       } catch (error) {
           console.error("Error fetching users:", error);
       }
@@ -78,7 +77,7 @@
 </script>
 
 <div class="card">
-  <div class="card-header">Create Marketplace App</div>
+  <div class="card-header"><h3>Create Marketplace App</h3></div>
   <div class="card-body">
       <form on:submit|preventDefault={createApp}>
           <div class="mb-3">
