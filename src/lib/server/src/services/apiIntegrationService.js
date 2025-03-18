@@ -4,21 +4,21 @@ const pool = require('../config/db')
 exports.createApiIntegration2 = async ( data ) => {
     const { name, endpoint_url, method, headers, body, authentication } = data ;
     const [ result ] = await pool.execute(
-        "INSERT INTO api_integrations (name, endpoint_url, method, headers, body, authentication ) VALUES (?,?,?,?,?,?)",
+        "INSERT INTO api_integrations (name, endpoint_url, method, headers, body, authentication, created_by ) VALUES (?,?,?,?,?,?,?)",
         [ name, endpoint_url, method, headers, body, authentication  ]
     );
     return { id: result.insertId, name, endpoint_url, method, headers, body, authentication }
 };
 exports.createApiIntegration = async (data) => {
-    const { name, endpoint_url, method, headers, body, authentication } = data;
+    const { name, endpoint_url, method, headers, body, authentication, created_by } = data;
     const headersJson = headers ? JSON.stringify(headers) : null;
     const bodyJson = body ? JSON.stringify(body) : null;
     const authJson = authentication ? JSON.stringify(authentication) : null;
     const [result] = await pool.execute(
-        "INSERT INTO api_integrations (id, name, endpoint_url, method, headers, body, authentication) VALUES (?,?,?,?,?,?,?)",
-        [ name, endpoint_url, method, headersJson, bodyJson, authJson]
+        "INSERT INTO api_integrations (name, endpoint_url, method, headers, body, authentication, created_by) VALUES (?,?,?,?,?,?,?)",
+        [ name, endpoint_url, method, headersJson, bodyJson, authJson, created_by]
     );
-    return { id: result.insertId, name, endpoint_url, method, headers, body, authentication };
+    return { id: result.insertId, name, endpoint_url, method, headers, body, authentication, created_by };
 };
 
 
@@ -33,9 +33,9 @@ exports.getApiIntegrationById = async ( id ) => {
 };
 
 exports.updateApiIntegration2 = async ( id, data ) => {
-    const { name, endpoint_url, method, headers, body, authentication  } = data
+    const { name, endpoint_url, method, headers, body, authentication , created_by } = data
     const [ rows ] = await pool.execute(
-        "UPDATE api_integrations SET name = ?, endpoint_url = ?, method = ?, headers = ?, body = ?, authentication = ? WHERE id = ?",
+        "UPDATE api_integrations SET name = ?, endpoint_url = ?, method = ?, headers = ?, body = ?, authentication = ? created_by = ? WHERE id = ?",
             [name, endpoint_url, method, headers, body, authentication, id ]
     );
     return rows; 
@@ -68,6 +68,10 @@ exports.updateApiIntegration = async (id, data) => {
     if (data.authentication !== undefined) {
         fields.push('authentication = ?');
         params.push(typeof data.authentication === 'object' ? JSON.stringify(data.authentication) : data.authentication);
+    }
+    if(data.created_by !== undefined){
+        fields.push('created_by = ?')
+        params.push(data.created_by)
     }
     if (fields.length === 0) {
         throw new Error('No fields provided for update');

@@ -1,16 +1,20 @@
 const apiIntegrationService = require("../services/apiIntegrationService")
 const responseHandler = require("../utils/responseHandler")
 
-exports.createApiIntegration = async ( req, res ) => {
+exports.createApiIntegration = async (req, res) => {
     try {
-        const api = await apiIntegrationService.createApiIntegration(req.body)  
-        return responseHandler.success(res, "Api Route Successfully Created", api, 201)  
-    } 
-    catch (error) {
-        return responseHandler.error(res, error.message)
+        console.log("Received API Integration Data:", req.body);
+        const { name, endpoint_url, method, created_by } = req.body;
+        if (!name || !endpoint_url || !method || !created_by) {
+            return responseHandler.error(res, "Missing required fields: name, endpoint_url, method, created_by", 400);
+        }
+        const api = await apiIntegrationService.createApiIntegration(req.body);
+        return responseHandler.success(res, "API Route Successfully Created", api, 201);
+    } catch (error) {
+        console.error("Error creating API Integration:", error);
+        return responseHandler.error(res, error.message);
     }
-}
-
+};
 
 exports.getAllApiIntegration = async ( req, res ) => {
     try {

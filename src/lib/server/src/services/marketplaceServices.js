@@ -1,10 +1,10 @@
 const pool = require('../config/db')
 
 exports.createMarketPlace = async ( data ) => {
-    const { app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user } = data ;
+    const { app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user, created_by } = data ;
     const [ result ] = await pool.execute(
-        "INSERT INTO marketplace ( app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user) VALUES (?,?,?,?,?,?,?)",
-        [ app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user ]
+        "INSERT INTO marketplace ( app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user, created_by) VALUES (?,?,?,?,?,?,?,?)",
+        [ app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user, created_by ]
     );
     return { id: result.insertId, app_name, description, icon_url, app_type, iframe_url, security_groups_admin, security_groups_user }
 };
@@ -32,7 +32,8 @@ exports.updateMarketPlace2 = async ( id, data ) => {
 }
 
 exports.updateMarketPlace = async (id, data) => {
-    const existingMarket = await exports.getMarketPlaceById(id);
+    try {
+        const existingMarket = await exports.getMarketPlaceById(id);
     if (!existingMarket) return null;
     const fields = [];
     const params = [];
@@ -65,15 +66,22 @@ exports.updateMarketPlace = async (id, data) => {
         fields.push('security_groups_user = ?');
         params.push(data.security_groups_user);
     }
+    if(data.created_at !== undefined){
+        fields.push('created_at = ?')
+        params.push(data.created_at)
+    }
     if (fields.length === 0) {
         throw new Error('No fields provided for update');
     }
-
     params.push(id);
     const query = `UPDATE marketplace SET ${fields.join(', ')} WHERE id = ?`;
     const [rows] = await pool.execute(query, params);
-
     return rows;
+    } 
+    catch (error) {
+        console.error(error.message)
+    }
+    
 };
 
 

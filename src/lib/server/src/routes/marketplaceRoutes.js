@@ -3,7 +3,9 @@
     const marketplaceController = require('../controllers/marketplaceController')
     const validate = require('../middlewares/validate.middleware')
     const marketplaceValidation = require('../validators/marketplaceValidations')
-
+    const admin = require('../middlewares/authMiddleware')
+    
+    router.use(admin)
     router.route("/marketplace")
     .post( validate(marketplaceValidation.createMarketPlaceSchema), marketplaceController.createMarketplace )
     .get( marketplaceController.getAllMarketplace )

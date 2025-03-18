@@ -3,6 +3,9 @@ const router = express.Router()
 const userController = require('../controllers/userControllers')
 const validate = require('../middlewares/validate.middleware')
 const userValidation = require('../validators/userValidations')
+// const admin = require('../middlewares/authMiddleware')
+
+// router.use(admin)
 
 router.route("/user")
 .post( validate(userValidation.createUser),userController.createUser )

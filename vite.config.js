@@ -4,7 +4,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
-
+	build: {
+		sourcemap: false // Disable source maps
+	  },
 	test: {
 		workspace: [
 			{
